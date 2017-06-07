@@ -22,19 +22,22 @@ def cli():
 
 @cli.command()
 @click.option('--model_name', '-m', default=None,
-              help='Specify model to train. Available models: regression, lstm.')
+              help=('Specify model to train.'
+                    ' Available models: regression, lstm.'))
 def train(model_name):
     """
     Train available models.
     """
     if not model_name:
-        logger.info('Specify model to train. Available models: regression, lstm.')
+        logger.info('Specify model to train.'
+                    ' Available models: regression, lstm.')
 
     MODELS = {Regression.NAME: Regression, LSTM.NAME: LSTM}
     MODEL = MODELS.get(model_name, None)
 
     if not MODEL:
-        logger.info('Invalid model specified. Available models: regression, lstm.')
+        logger.info('Invalid model specified. '
+                    'Available models: regression, lstm.')
         sys.exit()
 
     m = MODEL()
@@ -43,8 +46,11 @@ def train(model_name):
 
 @cli.command()
 @click.option('--image', '-i', default=None,
-              help='Specify image to test.')
+              help='Specify image to query.')
 def query(image):
+    """
+    Query image with different models.
+    """
     if image.startswith(('http://', 'https://')):
         img = Image.open(urllib.request.urlopen(image))
     else:
@@ -53,6 +59,5 @@ def query(image):
     img.thumbnail(MNIST_IMAGE_DIMENSIONS, Image.ANTIALIAS)
     data = np.asarray(img.getdata()).reshape(1, 784)
     data = (data / 255)
-    # from pprint import pprint; pprint(data)
     model = Regression()
     model.query(data)
