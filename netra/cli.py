@@ -24,7 +24,9 @@ def cli():
 @click.option('--model_name', '-m', default=None,
               help=('Specify model to train.'
                     ' Available models: regression, lstm.'))
-def train(model_name):
+@click.option('--epochs', '-e', default=10000)
+@click.option('--batch_size', '-b', default=100)
+def train(model_name, epochs, batch_size):
     """
     Train available models.
     """
@@ -41,7 +43,7 @@ def train(model_name):
         sys.exit()
 
     m = MODEL()
-    m.train()
+    m.train(epochs, batch_size)
 
 
 @cli.command()

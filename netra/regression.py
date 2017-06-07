@@ -26,7 +26,10 @@ class Regression(BaseModel):
         return output
 
     def train(self, epochs=100000, batch_size=100):
+        self.restore()
         logger.info('Starting training')
+        logger.info('Epochs {}, Batch size: {}'.format(epochs, batch_size))
+
         cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
             logits=self.output(), labels=self.outputs))
         train_step = tf.train.GradientDescentOptimizer(

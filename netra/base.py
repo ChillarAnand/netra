@@ -47,6 +47,7 @@ class BaseModel:
             logger.info('No model to restore')
 
     def save(self):
+        logger.info('Saving model')
         return self.saver.save(self.session, self.model_path)
 
     def color_print(self, text):
