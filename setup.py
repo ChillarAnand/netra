@@ -11,7 +11,7 @@ with open('README.md') as fh:
 
 setup(
     name='netra',
-    version='0.1.1',
+    version='0.1.2',
     url='https://github.com/chillaranand/netra',
     license='BSD',
     author='chillar',
