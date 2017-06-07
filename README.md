@@ -1,15 +1,15 @@
-# netra
+## netra
 
 Train & query MNIST dataset with different models using Tensorflow.
 
 
-# Installation
+### Installation
 
 
     $ pip install netra
 
 
-# Usage
+### Usage
 
 Help:
 
@@ -27,7 +27,7 @@ Training model:
     $ netra train -m regression -e 1000 -b 100
 
 
-# Sample output:
+### Sample output:
 
 ![netra](https://user-images.githubusercontent.com/4463796/26892117-e1a77a34-4bd4-11e7-91d2-11af0d1294f7.png)
 
