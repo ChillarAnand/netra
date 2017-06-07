@@ -3,7 +3,11 @@ Train MNIST with different models using Tensorflow.
 """
 from setuptools import find_packages, setup
 
-dependencies = ['click']
+dependencies = open('requirements.txt').read().splitlines()
+
+with open('README.md') as fh:
+    long_description = fh.read()
+
 
 setup(
     name='netra',
@@ -13,7 +17,7 @@ setup(
     author='chillar',
     author_email='anand21nanda@gmail.com',
     description='Train MNIST with different models using Tensorflow.',
-    long_description=__doc__,
+    long_description=long_description,
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
     zip_safe=False,
