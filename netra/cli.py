@@ -6,7 +6,7 @@ import click
 import numpy as np
 from PIL import Image
 
-from netra import MNIST_IMAGE_DIMENSIONS
+from netra import MNIST_IMAGE_DIMENSIONS, PIXEL_MAX_VAL
 from netra.regression import Regression
 from netra.rnn import LSTM
 from netra.utils import get_logger
@@ -59,7 +59,8 @@ def query(image):
         img = Image.open(expanduser(image))
     img = img.convert("L")
     img.thumbnail(MNIST_IMAGE_DIMENSIONS, Image.ANTIALIAS)
-    data = np.asarray(img.getdata()).reshape(1, 784)
-    data = (data / 255)
+    width, height = MNIST_IMAGE_DIMENSIONS
+    data = np.asarray(img.getdata()).reshape(1, width * height)
+    data = data / PIXEL_MAX_VAL
     model = Regression()
     model.query(data)

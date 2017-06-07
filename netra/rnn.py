@@ -16,8 +16,9 @@ class LSTM(BaseModel):
 
     def __init__(self, rnn_size=256, output_nodes=10):
         self.rnn_size = rnn_size
-        self.inputs = tf.placeholder('float', [None, num_chunks, chunk_size])
-        self.outputs = tf.placeholder('float')
+        self.inputs = tf.placeholder(tf.float32,
+                                     [None, num_chunks, chunk_size])
+        self.outputs = tf.placeholder(tf.float32)
         self.weights = tf.Variable(tf.random_normal([rnn_size, output_nodes]))
         self.bias = tf.Variable(tf.random_normal([output_nodes]))
         self.setup()
@@ -36,7 +37,10 @@ class LSTM(BaseModel):
         return output
 
     def train(self, epochs=100, batch_size=100):
+        self.restore()
         logger.info('Starting training')
+        logger.info('Epochs: {}, Batch size: {}'.format(epochs, batch_size))
+
         prediction = self.output()
         cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
             logits=prediction, labels=self.outputs))
